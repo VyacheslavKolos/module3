@@ -1,0 +1,54 @@
+using System;
+using System.Diagnostics;
+using System.Linq;
+
+class Program
+{
+    static void Main()
+    {
+        double[] executionTimes = new double[10];
+
+        for (int i = 0; i < 5; i++)
+        {
+            int n = 10 * (i + 1);
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            MultiplyMatrixVector(n);
+            stopwatch.Stop();
+            executionTimes[i] = stopwatch.ElapsedMilliseconds;
+        }
+
+        for (int i = 0; i < 5; i++)
+        {
+            int m = 10 * (i + 1);
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            MultiplyMatrixVector(m);
+            stopwatch.Stop();
+            executionTimes[i + 5] = stopwatch.ElapsedMilliseconds;
+        }
+    }
+
+    static void MultiplyMatrixVector(int size)
+    {
+        double[] A = new double[size];
+        double[] B = new double[size];
+
+        for (int i = 0; i < size; i++)
+        {
+            double x = i;
+            A[i] = (Math.Pow(i, 2) - Math.Pow(x, 3) + 1) / (i + Math.Sin(x)) - Math.Pow(x, 3);
+            B[i] = (Math.Pow(x, 2) - Math.Pow(2, i) + 1) / (i + Math.Cos(4 * i) * Math.Cos(4 * i));
+        }
+
+        double[] C = new double[size];
+
+        for (int i = 0; i < size; i++)
+        {
+            double sum = 0;
+            for (int j = 0; j < size; j++)
+            {
+                sum += A[i] * B[j];
+            }
+            C[i] = sum;
+        }
+    }
+}
