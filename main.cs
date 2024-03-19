@@ -25,12 +25,15 @@ class Program
     {
         List<Car> cars = new List<Car>
         {
-            new Car("Toyota", "ABC123", 2020, 25000),
-            new Car("Honda", "DEF456", 2018, 20000),
-            new Car("Ford", "GHI789", 2019, 22000),
+            new Car("Toyota", "BC7344IT", 2020, 25000),
+            new Car("Honda", "AB2241BO", 2018, 20000),
+            new Car("Ford", "AI9999KA", 2019, 22000),
         };
 
+        // Using PLINQ to retrieve the values of the 'Number' field for all cars
         IEnumerable<string> numbers = cars.AsParallel().Select(car => car.Number);
+
+        Console.WriteLine("execution result:");
 
         foreach (string number in numbers)
         {
